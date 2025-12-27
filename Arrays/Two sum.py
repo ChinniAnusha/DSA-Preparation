@@ -23,5 +23,27 @@ arr = list(map(int,input().split()))
 t = int(input())
 print(twosum(arr,t))
 
+
+
+#Problem : Two sum
+#Approach:Hashmap
+
+class Solution:
+    def twoSum(self, nums: List[int], target: int) -> List[int]:
+          n = len(nums)
+          hashing = {}
+          rem = 0
+          for i in range(n):
+            rem = target - nums[i]
+            if rem in hashing:
+                return [hashing[rem],i]
+            if nums[i] not in hashing:
+                hashing[nums[i]] = i
+
+
+#Time Complexity (TC) : O(n) You traverse the array once.
+#Space Complexity (SC):O(n) In the worst case, you store all n elements in the hashmap.
+#source:Leetcode,Striver A to Z sheet
+
 # Time Complexity: O(nlogn) due to sorting
 # Space Complexity: O(1)
