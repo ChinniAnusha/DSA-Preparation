@@ -1,10 +1,10 @@
 # Problem: Two sum
 # Platform: LeetCode
 # optimal approach: sort the array and keep 2 pointers at begining and ending add then sum should be equal to target
+#🔴 Two pointers only if array is already sorted
 
 def twosum(arr,t):
   #logic
-    arr.sort()
     n = len(arr)
     l = 0  #left pointerr
     r = n - 1  #right pointer
