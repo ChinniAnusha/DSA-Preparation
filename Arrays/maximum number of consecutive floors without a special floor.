@@ -1,0 +1,18 @@
+#Approach:sort the special list and count the gaps between them and return the maximum gaps
+#Source:Leetcode
+
+class Solution:
+    def maxConsecutive(self, bottom: int, top: int, special: List[int]) -> int:
+        special.sort()
+        maximum = 0
+        previous = bottom - 1
+        for s in special:
+            if s < bottom and s > top:
+                continue
+            maximum = max(maximum,s - previous -1)
+            previous = s
+        maximum = max(maximum,top-s)
+        return maximum
+
+TC:O(nlogn)
+SC:O(1)
