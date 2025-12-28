@@ -1,0 +1,26 @@
+#Approach:Solved using hashset
+#Source:Leetcode
+class Solution:
+    def longestConsecutive(self, nums: List[int]) -> int:
+         n = len(nums)
+         count = 0
+         length = 1
+         it = set()
+         if n == 0:
+            return 0
+         for i in range(n):
+             it.add(nums[i])
+         for ele in it:
+             if ele - 1 not in it:
+                x = ele
+                count = 1
+                while x + 1 in it:
+                    x += 1
+                    count += 1
+                length = max(length,count)
+         return length
+#TC:O(2n)
+#SC:O(n)
+
+
+
