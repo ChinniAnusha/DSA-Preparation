@@ -1,0 +1,43 @@
+#Approach:store positives and negatives in two separate arrays and run a loop to store in the correct positions
+#Source:Leetcode
+
+def arrange(arr,n): #this is brute force solution and used when positives equal to negatives
+    positive = []
+    negative = []
+    for i in range(n):
+        if arr[i] > 0:
+            positive.append(arr[i])
+        else:
+            negative.append(arr[i])
+    for i in range(len(positive)):
+            arr[i*2] = positive[i]
+    for i in range(len(negative)):
+            arr[i*2+1] = negative[i]
+    return arr
+
+arr = list(map(int,input().split()))
+n = len(arr)
+print(arrange(arr,n))
+
+
+
+#optimal solution #tc:O(n) sc:O(n)
+
+def arrange(arr,n):
+    pi = 0
+    ni = 1
+    ans = [0]*n
+    for i in range(n):
+        if arr[i] < 0:
+            ans[ni] = arr[i]
+            ni += 2
+        else:
+            ans[pi] = arr[i]
+            pi += 2
+        
+    return ans
+
+    
+arr = list(map(int,input().split()))
+n = len(arr)
+print(arrange(arr,n))
