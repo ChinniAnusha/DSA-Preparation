@@ -1,0 +1,18 @@
+#Approach:use for loop and increase the count if character == "(" and decrease the count otherwise
+#Source:Leetcode
+class Solution:
+    def removeOuterParentheses(self, s: str) -> str:
+       result = ""
+       count = 0
+       for ch in s:
+           if ch == "(":
+              count += 1
+              if count > 1:
+                result += ch
+           else:
+              count -= 1
+              if count > 0:
+                result += ch
+       return result  
+#TC:O(n)
+#SC:O(n) for storing result
