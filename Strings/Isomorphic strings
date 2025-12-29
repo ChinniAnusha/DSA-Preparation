@@ -1,4 +1,4 @@
-#Approach:Bidirectional hashmap
+#Approach:Bidirectional hashmap to store mapping from s to t and t to s
 #source:Leetcode
 
 class Solution:
