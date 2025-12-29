@@ -1,0 +1,12 @@
+#Approach Traverse from the reverse and for each iteration check if the number is odd then from starting to until this point it is the largest odd number
+#source:Leetcode
+
+class Solution:
+    def largestOddNumber(self, num: str) -> str:
+        for i in range(len(num)-1,-1,-1):
+            if int(num[i]) % 2 == 1:
+                return num[:i+1]
+        return  "" # in case if there is no odd number 
+
+#TC:O(n)
+#SC:O(1)
