@@ -32,4 +32,4 @@ class Solution:
         return result
 
       #TC:O(n^3)
-      #SC:O(1) excluding output
+      #SC:O(1) excluding output it will be O(n) if quads are included
