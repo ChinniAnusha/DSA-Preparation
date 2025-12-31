@@ -5,7 +5,7 @@ class Solution:
     def reverseWords(self, s: str) -> str:
        result,i,n = '',0,len(s)
        while i < n:
-            while i < n and s[i] == ' ':
+            while i < n and s[i] == ' ': #check until there is no space and then start with j
                      i += 1
             if i >= n:
                    break
