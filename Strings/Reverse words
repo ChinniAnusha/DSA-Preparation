@@ -33,18 +33,20 @@ class Solution:
        chars = list(s)
        i,n = 0,len(chars)
        k = 0
-       
 
        while i < n:
-            while i < n and chars[i] == ' ':
+            while i < n and chars[i] == ' ': #skip spaces
                 i += 1
+
             while i < n and chars[i] != ' ':
                 chars[k] = chars[i]
                 i += 1
                 k += 1
-            if i < n:
+
+            if i < n: #remove Trailing spaces
                 chars[k] = ' '
                 k += 1
+       
        if k > 0 and chars[k-1] == ' ':
            k -= 1
         
