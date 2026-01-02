@@ -46,5 +46,5 @@ class Solution:
 
         return "".join(result)
 
-#TC:
-#SC:
+#TC:O(n)+O(k)+O(n) -> O(n)
+#SC:O(k)+O(n)+O(n)-> O(n)
