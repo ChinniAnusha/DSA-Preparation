@@ -20,3 +20,31 @@ class Solution:
 
 #TC:O(n) + O(k log k) + O(n)
 #SC:O(k) + O(k) + O(n)
+
+
+#solved using bubble sort
+class Solution:
+    def frequencySort(self, s: str) -> str:
+        freq = {}
+        for ch in s:
+            if ch not in freq:
+                freq[ch] = 1
+            else:
+                freq[ch] += 1
+        #create bubble
+        bubble = []
+        for i in range(len(s)+1):
+            bubble.append([])
+
+        for ch,count in freq.items():
+            bubble[count].append(ch)
+        
+        result = []
+        for count in range(len(s),-1,-1):  #for inside for loop cause we store list of characters in a list 
+            for ch in bubble[count]:
+                result.append(ch*count)
+
+        return "".join(result)
+
+#TC:
+#SC:
