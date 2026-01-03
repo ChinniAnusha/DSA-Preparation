@@ -1,0 +1,15 @@
+#Approach:iterating to a dict 
+#source:Leetcode
+class Solution:
+    def romanToInt(self, s: str) -> int:
+       roman = {"I":1,"V":5,"X":10,"L":50,"C":100,"D":500,"M":1000}
+       result = 0
+       for i in range(len(s)):
+           if i+1 < len(s) and roman[s[i]] < roman[s[i+1]]:
+                result -= roman[s[i]]
+           else:
+                result += roman[s[i]]
+       return result
+#TC:O(n)
+#SC:O(1) Space Complexity depends on whether the extra space grows with input size or not.here the space has nothing to do with the input size
+# even if s ="l" or s="IVM" 
