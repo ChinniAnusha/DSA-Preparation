@@ -10,7 +10,7 @@ class Solution:
          if string[0] == "-" or string[0] == "+":
               if string[0] == "-":
                   sign = -1 
-              string = string[1:]
+              string = string[1:] #slicing increases space
          for ch in string:
             if not ch.isdigit():
                 break
