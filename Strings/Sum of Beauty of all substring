@@ -1,0 +1,24 @@
+#approach:solved using for loops finding all susbstrings
+#Source:Leetcode
+
+class Solution:
+    def beautySum(self, s: str) -> int:
+        n = len(s)
+        total = 0
+        for i in range(n):
+            freq = {}
+            for j in range(i,n):
+                if s[j] in freq:
+                    freq[s[j]] += 1
+                else:
+                    freq[s[j]] = 1
+                values = freq.values()
+                maxi = max(values)
+                mini = min(values)
+                total += (maxi-mini)
+        return total
+
+#TC:O(n^2) this is optimal for this problem
+#SC:O(1) cause dictionary can hold upto 26 alphabets 
+#“Although we use a frequency array/dictionary, it stores counts for a fixed character set (26 lowercase letters). 
+#Since the size of the data structure does not grow with input size, the space complexity is O(1).”
