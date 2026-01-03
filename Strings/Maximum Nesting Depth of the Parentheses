@@ -16,3 +16,24 @@ class Solution:
 #TC:O(n)
 #SC:O(1)
 
+
+#Approach:Solved using stack
+
+class Solution:
+    def maxDepth(self, s: str) -> int:
+        stack = []
+        current = 0
+        maxi = 0
+        for ch in s:
+            if ch == "(":    
+                stack.append(ch)
+                current = len(stack)
+            elif ch == ")":
+                stack.pop()
+                current = 0
+            maxi = max(current,maxi)
+        return maxi
+
+#TC:O(n)
+#SC:O(d) based on the depth 
+
