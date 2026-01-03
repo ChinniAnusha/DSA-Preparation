@@ -1,0 +1,27 @@
+#approach:solved by removing spaces,not considering digits
+#source:Leetcode
+class Solution:
+    def myAtoi(self, s: str) -> int:
+         string = s.strip() #removes any spaces
+         result = 0
+         sign = 1
+         if not string:
+            return 0
+         if string[0] == "-" or string[0] == "+":
+              if string[0] == "-":
+                  sign = -1 
+              string = string[1:]
+         for ch in string:
+            if not ch.isdigit():
+                break
+            result = result*10+int(ch)
+         result = result*sign
+         
+         if result < -2**31:
+            return -2**31
+         if result > 2**31-1: #these are important
+            return 2**31-1
+
+         return result
+#TC:O(n)
+#SC:O(1)
