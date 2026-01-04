@@ -9,7 +9,7 @@ class Solution:
            for i in range(n):
                if s == goal:
                   return True    
-               s = s[-1]+s[:-1]
+               s = s[-1]+s[:-1] #we can even write it as s= s[1:]+s[0]
            return False
 
 
