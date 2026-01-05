@@ -37,6 +37,11 @@ f = floor(arr,n,x)
 c = ceil(arr,n,x)
 print(f,c)
 
+#TC:O(logN)
+#SC:O(1)
+
+
+
 
 
 
