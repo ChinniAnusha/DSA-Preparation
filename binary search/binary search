@@ -1,0 +1,46 @@
+#Approach:iterative approach
+#source:Leetcode
+class Solution:
+    def search(self, nums: List[int], target: int) -> int:
+        n = len(nums)
+        low = 0
+        high = n - 1
+        while low <= high:
+            mid = (low + high) // 2
+            if nums[mid] == target:
+                return mid
+            elif target > nums[mid]:
+                low = mid + 1
+            else:
+                high = mid - 1
+        return -1
+
+#TC:O(logN) since we are dividing the array
+#SC:O(1)
+
+
+#recursive approach
+def search(arr,low,high,t,n):
+    if low > high:
+        return -1
+    mid = (low + high)//2
+    if arr[mid] == t:
+        return mid
+    elif t > arr[mid]:
+        low = mid + 1
+        return search(arr,low,high,t,n)
+    else:
+        high = mid - 1
+        return search(arr,low,high,t,n)
+
+
+
+arr = list(map(int,input().split()))
+n = len(arr)
+t = int(input())
+low = 0
+high = n-1
+print(search(arr,low,high,t,n))
+
+#TC:O(logN)
+#SC:O(1)
