@@ -1,0 +1,39 @@
+#Approach:brute force using linear search
+#Source:Leetcode
+class Solution:
+    def findMin(self, nums: List[int]) -> int:
+        n = len(nums)
+        min = float('inf')
+        for i in range(n):
+            if nums[i] < min:
+                min = nums[i]
+        return min
+
+#TC:O(n)
+#SC:O(1)
+
+#Approach:solved using binary search optimal solution
+#source:leetcode
+class Solution:
+    def findMin(self, nums: List[int]) -> int:
+        n = len(nums)
+        mini = float('inf')
+        low = 0
+        high = n - 1
+        while low <= high:
+            mid = (low+high) // 2
+            #check which half is sorted
+            if nums[low] <= nums[mid]: #here if left half is sorted low will be the min element
+                 mini = min(mini,nums[low])
+                 low = mid + 1
+                
+            else:
+                mini = min(mini,nums[mid])
+                high = mid - 1
+        return mini
+#TC:O(logn)
+#SC:O(1)
+
+
+
+
