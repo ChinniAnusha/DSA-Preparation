@@ -1,0 +1,32 @@
+#Approach:solved uisng binary search
+class Solution:
+    def findMin(self, nums: List[int]) -> int:
+        n = len(nums)
+        mini = float('inf')
+        low = 0
+        high = n - 1
+        index = -1
+        while low <= high:
+            mid = (low+high) // 2
+            #if search space is already sorted
+            if nums[low] <= nums[high]:
+                 if nums[low] < ans:
+                     index = low
+                     ans = nums[low]        
+                 break
+
+            #check which half is sorted
+            if nums[low] <= nums[mid]: #here if left half is sorted low will be the min element
+                 if nums[low] < mini:
+                     index = low
+                     mini = nums[low]
+                 low = mid + 1
+                
+            else:
+                if nums[mid] < mini:
+                     index = mid
+                     mini = nums[mid]
+                high = mid - 1
+        return index    #the index will be the number of roatations
+#TC:O(logn)
+#SC:O(1)
