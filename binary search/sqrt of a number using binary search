@@ -1,0 +1,31 @@
+#brute force
+def sqrtn(n):
+    ans = 1
+    for i in range(n):  #TC:O(n) SC:O(1)
+        if i * i <= n:
+            ans = i
+        else:
+            break #this is the case where the sqrt of a number is greater than the given number
+    return ans
+    
+n = int(input())
+print(sqrtn(n))
+
+
+#optimal
+#Binary search
+def sqrtn(n): #TC:O(logn) SC:O(1)
+    ans = 1
+    low = 1
+    high = n
+    while low <= high:
+        mid = (low+high) // 2
+        if mid * mid <= n:
+            ans = mid
+            low = mid + 1
+        else:
+            high = mid - 1
+    return ans
+    
+n = int(input())
+print(sqrtn(n))
