@@ -1,0 +1,40 @@
+#Brute force
+def nthroot(n,m):
+    for i in range(m):
+        if i**n == m:
+            return i   #TC:O(m logn)
+        elif i**n > m:
+            break
+        
+    return -1
+
+n = int(input())
+m = int(input())
+print(nthroot(n,m))
+
+#optimal
+#Binary search
+def nthroot(n,m):
+    low = 1    #TC:O(log m)*log n (for exponentiation)
+    high = m
+                                           
+    while low <= high:
+        mid = (low+high) // 2
+        ans = 1                      
+        for _ in range(n):
+            ans *= mid
+            if ans > m:
+                break
+    
+        if ans == m:
+            return n
+        elif ans > m:
+            high = mid - 1
+        else:
+            low = mid + 1
+    return -1
+
+            
+n = int(input())
+m = int(input())
+print(nthroot(n,m))
