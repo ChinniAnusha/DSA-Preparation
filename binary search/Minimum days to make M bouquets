@@ -1,0 +1,71 @@
+#Approach:Brute force
+#source:leetcode
+
+class Solution:
+    def minDays(self, bloomDay: List[int], m: int, k: int) -> int:
+        def validdays(arr,day,m,k): 
+             count = 0
+             no_of_bouquets = 0
+             for i in range(0,len(bloomDay)):
+                  if arr[i] <= day:
+                     count += 1
+                  else:
+                     no_of_bouquets += (count//k)
+                     count = 0
+             no_of_bouquets += (count//k)
+             if no_of_bouquets >= m:
+                return True
+             else:
+                return False
+        
+        n = len(bloomDay)
+        if m*k > n:
+            return -1
+        for i in range(min(bloomDay),max(bloomDay)+1):
+             mini = validdays(bloomDay,i,m,k)
+             if mini is True:
+                return i
+        return -1
+
+#TC:O(maxi-mini+1)*O(n)
+#SC:O(1)
+
+
+#Optimal
+
+class Solution:
+    def minDays(self, bloomDay: List[int], m: int, k: int) -> int:
+        def validdays(arr,day,m,k):
+             count = 0
+             no_of_bouquets = 0
+             for i in range(0,len(bloomDay)):
+                  if arr[i] <= day:
+                     count += 1
+                  else:
+                     no_of_bouquets += (count//k)
+                     count = 0
+             no_of_bouquets += (count//k)
+             if no_of_bouquets >= m:
+                return True
+             else:
+                return False
+        
+        n = len(bloomDay)
+        if m*k > n:
+            return -1
+        low = min(bloomDay)
+        high = max(bloomDay)
+        while low <= high:
+            mid = (low+high) // 2
+            mini = validdays(bloomDay,mid,m,k)
+            if mini is True:
+                    ans = mid
+                    high = mid - 1
+            else:
+                    low = mid + 1
+        return low
+
+#we can return ans or low becuase when low and high crosess,the low comes from impossible to possible and high comes from possible to impossible and low is at ans
+#TC:O(n log(maxi-mini+1)
+#SC:O(1)
+
