@@ -1,0 +1,48 @@
+#Approach:Brute force
+#source:leetcode
+
+class Solution:
+        def minEatingSpeed(self, piles: List[int], h: int) -> int:
+            
+            def func(arr,hourly):
+                n = len(arr)
+                total_hours = 0
+                for i in range(n):
+                    total_hours += ceil(arr[i]/hourly)
+                return total_hours
+
+
+            for i in range(1,max(piles)+1):
+                returnnum = func(piles,i)
+                if returnnum <= h:
+                    return i
+#TC:O(n * max(a[])), since for each possible speed we go through all the piles.
+#SC:O(1)
+
+
+#Optimal using binary search
+class Solution:
+        def minEatingSpeed(self, piles: List[int], h: int) -> int:
+            
+            def func(arr,hourly):
+                n = len(arr)
+                total_hours = 0
+                for i in range(n):
+                    total_hours += ceil(arr[i]/hourly)
+                return total_hours
+        
+            #binary search
+            low = 1
+            high = max(piles)
+            while low <= high:
+                mid = (low+high) // 2
+                hours = func(piles,mid)
+                if hours <= h:
+                    ans = mid
+                    high = mid-1
+                elif hours > h:
+                    low = mid + 1
+                
+            return ans
+#TC:O(N*log(max(a[]))), we apply binary search on our search space to reduce it into half at every step.
+#SC:O(1)
