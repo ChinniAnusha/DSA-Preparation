@@ -1,0 +1,60 @@
+#Approach:Brute force
+#Source:Leetcode
+
+class Solution:
+    def splitArray(self, nums: List[int], k: int) -> int:
+          def count_partitions(nums,mini):
+              n = len(nums)
+              partitions = 1
+              sum_of_ways = 0
+              for i in range(n):
+                 if sum_of_ways+nums[i] <= mini :
+                       sum_of_ways += nums[i]
+                 else:
+                      partitions += 1
+                      sum_of_ways = nums[i]
+              return partitions
+
+          low = max(nums)
+          high = sum(nums)
+          for i in range(low,high+1):
+                 min_of_maxi = count_partitions(nums,i)
+                 if min_of_maxi == k:
+                    return i
+          return low
+#TC:O(n*((sum-maxi)+1))
+#SC:O(1)
+
+
+lass Solution:
+    def splitArray(self, nums: List[int], k: int) -> int:
+          def count_partitions(nums,mini):
+              n = len(nums)
+              partitions = 1
+              sum_of_ways = 0
+              for i in range(n):
+                 if sum_of_ways+nums[i] <= mini :
+                       sum_of_ways += nums[i]
+                 else:
+                      partitions += 1
+                      sum_of_ways = nums[i]
+              return partitions
+
+          low = max(nums)
+          high = sum(nums)
+          while low <= high:
+             mid = (low+high)//2
+             mini = count_partitions(nums,mid)
+             if mini > k:
+                low = mid + 1
+             else:
+                high = mid - 1
+          return low
+
+#TC:O(n*log((sum-max)+1))
+#SC:O(1)
+
+
+
+
+            
