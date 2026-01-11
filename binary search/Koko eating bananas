@@ -36,7 +36,7 @@ class Solution:
             high = max(piles)
             while low <= high:
                 mid = (low+high) // 2
-                hours = func(piles,mid)
+                hours = func(piles,mid) 
                 if hours <= h:
                     ans = mid
                     high = mid-1
