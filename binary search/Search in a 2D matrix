@@ -23,7 +23,7 @@ class Solution:
             if matrix[i][0] <= target and target <= matrix[i][m-1]:
                     return binarysearch(matrix[i],target)
         return False
-#TC:O(n+log2 m)
+#TC:O(n*log2 m)
 #SC:O(1)
 
 #optimal approach 2
