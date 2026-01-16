@@ -1,0 +1,35 @@
+#optimal
+class Solution:
+    def numberOfSubstrings(self, s: str) -> int:
+        count = 0
+        n = len(s)
+        lastseen = [-1]*3
+        for i in range(n):
+            lastseen[ord(s[i])-ord('a')] = i
+            if lastseen[0] != -1 and lastseen[1] != -1 and lastseen[2] != -1:
+                count += (1+min(lastseen[0],lastseen[1],lastseen[2]))
+        return count
+
+#TC:O(n)
+#SC:O(1)
+
+#optimal using two pointer and sliding window
+class Solution:
+    def numberOfSubstrings(self, s: str) -> int:
+        count = 0
+        n = len(s)
+        l = 0
+        r = 0
+        freq = [0]*3
+        while r < n:
+            freq[ord(s[r])-ord('a')] += 1
+            while freq[0] > 0 and freq[1] > 0 and freq[2] > 0:
+                count += n - r
+                freq[ord(s[l])-ord('a')] -= 1
+                l += 1
+            r += 1
+
+#TC:O(n)
+#SC:O(1)
+
+        return count
