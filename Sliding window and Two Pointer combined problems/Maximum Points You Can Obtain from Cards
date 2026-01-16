@@ -1,0 +1,20 @@
+#optimal approach
+class Solution:
+    def maxScore(self, cardPoints: List[int], k: int) -> int:
+         n = len(cardPoints)
+         lsum = 0
+         rsum = 0
+         maxii = 0
+         for i in range(k):
+            lsum += cardPoints[i]
+            maxii = lsum
+         right = n-1
+         for i in range(k-1,-1,-1):
+              lsum -= cardPoints[i]
+              rsum += cardPoints[right]
+              right -= 1
+              maxii = max(maxii,lsum+rsum)
+         return maxii
+
+#TC:O(n)
+#SC:O(1)
