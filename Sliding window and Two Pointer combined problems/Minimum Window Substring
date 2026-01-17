@@ -1,0 +1,34 @@
+#Brute force
+class Solution:
+    def minWindow(self, s: str, t: str) -> str:
+          m = len(s)
+          n = len(t) 
+          mini = 10**5
+          sindex = -1
+          for i in range(m):
+            hashmap = {}
+            count = 0
+            for j in range(n):
+                if t[j] in hashmap:
+                    hashmap[t[j]] += 1
+                else:
+                    hashmap[t[j]] = 1
+            for j in range(i,m):
+              if s[j] in hashmap:
+                 if hashmap[s[j]] > 0:
+                   count += 1
+                 hashmap[s[j]] -= 1
+                 if count == n:
+                    if (j-i+1) < mini:
+                        mini = j-i+1
+                        sindex = i
+                    break
+          return "" if sindex == -1 else s[sindex:sindex+mini] 
+
+#TC:O(n^2)
+#SC:O(1)
+
+#Optimal
+
+
+
