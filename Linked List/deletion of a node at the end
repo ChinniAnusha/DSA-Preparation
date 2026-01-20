@@ -1,0 +1,204 @@
+#deletion at end node
+class Node:
+    def __init__(self,data):
+        self.data = data
+        self.next = None
+        
+class LL:
+    def __init__(self):
+        self.head = None
+        
+
+    def insert(self,newnode):
+        if self.head is None:
+            self.head = newnode
+        else:
+            lastnode = self.head
+            while True:
+                if lastnode.next is None:
+                    break
+                lastnode = lastnode.next
+            lastnode.next = newnode
+    
+    def deleteEnd(self):
+        lastnode = self.head
+        while lastnode.next is not None:
+            previousnode = lastnode
+            lastnode = lastnode.next
+        previousnode.next = None
+            
+        
+    def display(self):
+        current_node = self.head
+        while True:
+            if current_node is None:
+                break
+            else:
+                print(current_node.data,"->",end="")
+                current_node = current_node.next
+        
+
+n1 = Node(10)
+L1 = LL()
+L1.insert(n1)
+n2 = Node(20)
+L1.insert(n2)
+n3 = Node(30)
+L1.insert(n3)
+L1.deleteEnd()
+L1.display()
+
+          
+#deletion of a node between two nodes
+class Node:
+    def __init__(self,data):
+        self.data = data
+        self.next = None
+        
+class LL:
+    def __init__(self):
+        self.head = None
+        
+
+    def insert(self,newnode):
+        if self.head is None:
+            self.head = newnode
+        else:
+            lastnode = self.head
+            while True:
+                if lastnode.next is None:
+                    break
+                lastnode = lastnode.next
+            lastnode.next = newnode
+            
+    
+    def deleteat(self,position):
+        current_position = 0
+        currentnode = self.head
+        while True:
+            if current_position == position:
+                previousnode.next = currentnode.next
+                currentnode.next = None
+                break
+            previousnode = currentnode
+            currentnode = currentnode.next
+            current_position += 1
+            
+        
+    def display(self):
+        current_node = self.head
+        while True:
+            if current_node is None:
+                break
+            else:
+                print(current_node.data,"->",end="")
+                current_node = current_node.next
+        
+
+n1 = Node(10)
+L1 = LL()
+L1.insert(n1)
+n2 = Node(20)
+L1.insert(n2)
+n3 = Node(30)
+L1.insert(n3)
+L1.deleteat(1)
+L1.display()
+
+
+#deletion of a node between two nodes
+#edge cases:if position is invalid
+#list is empty or not
+#node that is being deleted head or not
+#
+class Node:
+    def __init__(self,data):
+        self.data = data
+        self.next = None
+        
+class LL:
+    def __init__(self):
+        self.head = None
+        
+    def isListEmpty(self):
+        if self.head is None:
+              return True
+        else:
+              return False
+            
+    def listlength(self):#finding length of the ll
+        length = 0
+        currentNode = self.head
+        while currentNode is not None:
+            length += 1
+            currentNode = currentNode.next
+        return length
+        
+
+    def insert(self,newnode):
+        if self.head is None:
+            self.head = newnode
+        else:
+            lastnode = self.head
+            while True:
+                if lastnode.next is None:
+                    break
+                lastnode = lastnode.next
+            lastnode.next = newnode
+            
+    def deleteHead(self):
+        if self.isListEmpty() is False:
+            previousHead = self.head
+            self.head = self.head.next
+            previousHead.next = None
+        else:
+            print("linkedlist is empty.Delete failed")
+            
+    
+    def deleteat(self,position):
+#here we are trying to delete at position that is one number less than 
+#length cause postion number start at 0,1,2... that is why >= is written
+
+            if position < 0 or position >= self.listlength():
+                 print("invaild position")
+                 return
+            if self.isListEmpty() is False:
+                if position == 0:
+                    self.deleteHead()
+                    return
+                currentnode = self.head
+                current_position = 0
+                while True:
+                    if current_position == position:
+                            previousnode.next = currentnode.next
+                            currentnode.next = None
+                            break
+                    previousnode = currentnode
+                    currentnode = currentnode.next
+                    current_position += 1
+            
+        
+    def display(self):
+        current_node = self.head
+        while True:
+            if current_node is None:
+                break
+            else:
+                print(current_node.data,"->",end="")
+                current_node = current_node.next
+        
+
+n1 = Node(10)
+L1 = LL()
+L1.insert(n1)
+n2 = Node(20)
+L1.insert(n2)
+n3 = Node(30)
+L1.insert(n3)
+L1.deleteat(0)
+L1.display()
+
+
+
+
+
