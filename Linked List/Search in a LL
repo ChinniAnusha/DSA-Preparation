@@ -1,0 +1,11 @@
+def searchInLinkedList(head, k):
+    # Your code goes here.
+    current_node = head
+    while current_node is not None:
+        if current_node.data == k:
+            return 1
+        current_node = current_node.next
+    return 0
+
+#TC:O(n)
+#SC:O(1)
