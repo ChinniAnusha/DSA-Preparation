@@ -1,0 +1,19 @@
+def deleteTail(head):
+    # Case 1: empty list
+    if head is None:
+        return None
+
+    # Case 2: only one node
+    if head.next is None:
+        return None
+
+    # Case 3: more than one node
+    curr = head
+    while curr.next is not None:
+        curr = curr.next
+
+    # curr is the tail
+    curr.prev.next = None
+
+    return head
+
