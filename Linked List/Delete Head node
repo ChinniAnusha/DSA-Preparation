@@ -1,0 +1,31 @@
+def deleteHead(head):
+    # Case 1: empty list
+    if head is None:
+        return None
+
+    # Case 2: only one node
+    if head.next is None:
+        return None
+
+    # Case 3: more than one node
+    new_head = head.next
+    new_head.prev = None
+    return new_head
+
+#TC:O(1)
+#SC:O(1)
+
+Because head is just a local variable inside the function.
+
+Your code:
+new_head = head.next
+new_head.prev = None
+return new_head
+
+
+When you do:
+
+head = deleteHead(head)
+
+
+👉 The returned new_head becomes the new head outside the function.
