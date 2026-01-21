@@ -1,0 +1,34 @@
+def deleteKthNode(head, k):
+    # Case 1: empty list or invalid k
+    if head is None or k <= 0:
+        return head
+
+    curr = head
+    count = 1
+
+    # Move to the kth node
+    while curr is not None and count < k:
+        curr = curr.next
+        count += 1
+
+    # If k is greater than length
+    if curr is None:
+        return head   
+
+    # Case 2: delete head
+    if curr.prev is None:
+        head = curr.next
+        if head:
+            head.prev = None
+
+    # Case 3: delete tail
+    elif curr.next is None:
+        curr.prev.next = None
+
+    # Case 4: delete middle node
+    else:
+        curr.prev.next = curr.next
+        curr.next.prev = curr.prev
+
+    return head 
+
