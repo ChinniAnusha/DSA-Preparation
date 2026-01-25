@@ -1,0 +1,90 @@
+#Brute force
+# Definition for singly-linked list.
+# class ListNode:
+#     def __init__(self, x):
+#         self.val = x
+#         self.next = None
+
+class Solution:
+    def getIntersectionNode(self, headA: ListNode, headB: ListNode) -> Optional[ListNode]:
+        hashmap = {}
+        temp = headA
+        while temp:
+            hashmap[temp] = 1
+            temp = temp.next
+        temp1 = headB
+        while temp1:
+            if temp1 in hashmap:
+                return temp1
+            temp1 = temp1.next
+        return None
+
+#TC:O(n1+n2)
+#SC:O(n1)
+
+#Better approach
+# Definition for singly-linked list.
+# class ListNode:
+#     def __init__(self, x):
+#         self.val = x
+#         self.next = None
+
+class Solution:
+    def findinter(self,t1,t2,d):
+        while d:
+            d -= 1
+            t2 = t2.next
+        while t1 != t2:
+                t1 = t1.next
+                t2 = t2.next
+        return t1
+
+
+    def getIntersectionNode(self, headA: ListNode, headB: ListNode) -> Optional[ListNode]:
+        n1,n2 = 0,0
+        temp = headA
+        temp1 = headB
+        while temp:
+            n1 += 1
+            temp = temp.next
+        while temp1:
+            n2 += 1
+            temp1 = temp1.next
+        if n1 < n2:
+            return self.findinter(headA,headB,n2-n1)
+        else:
+            return self.findinter(headB,headA,n1-n2)  
+#TC:O(n1)+O(n2)+O(n2-n1)+O(n1)
+#SC:O(1)
+
+#Optimal
+# Definition for singly-linked list.
+# class ListNode:
+#     def __init__(self, x):
+#         self.val = x
+#         self.next = None
+
+class Solution:
+    def getIntersectionNode(self, headA: ListNode, headB: ListNode) -> Optional[ListNode]:
+        if headA is None or headB is None:
+            return None 
+        t1 = headA
+        t2 = headB
+
+        while t1 != t2:
+             t1 = t1.next
+             t2 = t2.next
+             if t1 == t2:
+                return t1
+             if t1 is None:
+                t1 = headB
+             if t2 is None:
+                t2 = headA 
+        return t1
+#TC:O(n1+n2)
+#SC:O(1)
+
+
+
+
+
