@@ -1,0 +1,33 @@
+#Brute force
+class Node:
+    def __init__(self, data=0, next=None, prev=None):
+        self.data = data
+        self.next = next
+        self.prev = prev
+
+
+# Don't change the code above.
+
+
+def findPairs(head: Node, k: int) -> [[int]]:
+
+    # Write your code here.
+    # Return boolean true or false.
+    t1 = head
+    pairs = []
+    while t1 is not None:
+         t2 = t1.next
+         while t2 is not None:
+             if t1.data + t2.data == k:
+                 pairs.append([t1.data,t2.data])
+             t2 = t2.next
+         t1 = t1.next
+    
+    return pairs
+#TC:~ O(n^2)
+#SC:O(1)
+
+#Optimal using two pointers
+t1 = head
+w
+
