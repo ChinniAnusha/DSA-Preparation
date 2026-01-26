@@ -1,0 +1,70 @@
+#Recursive approach
+class Node:
+    def __init__(self, data=0, next=None):
+        self.data = data
+        self.next = next
+
+
+# Don't change the code above.
+def helper(temp):
+    if temp is None:
+        return 1
+    carry = helper(temp.next)
+    temp.data = temp.data + carry
+    if temp.data < 10:
+        return 0
+    temp.data = 0
+    return 1
+
+    
+
+def addOne(head: Node) -> Node:
+      carry = helper(head)
+      if carry == 1:
+          newnode = Node(1)
+          newnode.next = head 
+          return newnode
+      return head
+
+#TC:O(n)
+#SC:O(n)
+
+#Iterative approach
+class Node:
+    def __init__(self, data=0, next=None):
+        self.data = data
+        self.next = next
+
+
+# Don't change the code above.
+def reverse(head):
+    if head is None or head.next is None:
+        return head
+    newhead = reverse(head.next)
+    front = head.next
+    front.next = head
+    head.next = None
+
+    return newhead
+
+def addOne(head: Node) -> Node:
+      head = reverse(head)
+      temp = head
+      carry = 1
+      while temp:
+          temp.data = temp.data + carry
+          if temp.data < 10:
+              carry = 0
+              break
+          else:
+              temp.data = 0
+              carry = 1
+          temp = temp.next
+      head = reverse(head)
+      if carry == 1:
+          newnode = Node(1)
+          newnode.next = head
+          return newnode
+      return head
+#TC:O(3n)
+#SC:O(1)
