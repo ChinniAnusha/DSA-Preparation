@@ -1,0 +1,85 @@
+#Brute force
+class Node:
+    def __init__(self, val=0, next=None, child=None):
+        self.data = val
+        self.next = next
+        self.child = child
+
+
+# Don't change the code above.
+def convert(arr):
+    n = len(arr)
+    if n == 0:
+        return None
+    dummynode = Node(-1)
+    temp = dummynode
+    for i in range(n):
+        temp.child = Node(arr[i])
+        temp = temp.child
+    return dummynode.child
+
+
+def flattenLinkedList(head: Node) -> Node:
+    # Write your code here
+    arr = []
+    temp = head
+    t1 = None
+    while temp:
+        t1 = temp
+        while t1:
+           arr.append(t1.data)
+           t1 = t1.child
+        temp = temp.next
+    
+    arr.sort()
+    return convert(arr)
+#TC:O(xlogx)+O(n*m)where x = m*n
+#SC:O(1)
+
+#Optimal
+class Node:
+    def __init__(self, val=0, next=None, child=None):
+        self.data = val
+        self.next = next
+        self.child = child
+
+
+# Don't change the code above.
+def mergelist(l1,l2):
+    dummynode = Node(-1)
+    res = dummynode
+    while l1 != None and l2 != None:
+         if l1.data < l2.data:
+             res.child = l1
+             res = l1
+             l1 = l1.child
+         else:
+             res.child = l2
+             res = l2
+             l2 = l2.child
+
+         res.next = None
+
+    if l1:
+        res.child = l1
+    else:
+        res.child = l2  
+    
+    if dummynode.child:
+        dummynode.child.next = None 
+   
+    return dummynode.child
+
+
+def flattenLinkedList(head: Node) -> Node:
+    # Write your code here
+    if head is None or head.next is None:
+         return head
+    merge = flattenLinkedList(head.next)
+    head = mergelist(head,merge)
+
+    return head
+
+#TC:O(n*2m)
+#SC:O(1)
+
