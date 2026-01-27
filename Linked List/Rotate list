@@ -1,0 +1,84 @@
+#Brute force
+# Definition for singly-linked list.
+# class ListNode:
+#     def __init__(self, val=0, next=None):
+#         self.val = val
+#         self.next = next
+class Solution:
+    def reversee(self,arr,i,j):
+        while i < j:
+            arr[i],arr[j] = arr[j],arr[i]
+            i += 1
+            j -= 1
+
+    def rotateRight(self, head: Optional[ListNode], k: int) -> Optional[ListNode]:
+        arr = []
+        temp = head
+        if head is None or head.next is None or k == 0 :
+            return head
+
+        while temp:
+            arr.append(temp.val)
+            temp = temp.next
+        n = len(arr)
+        k = k%n
+        if k == 0:
+            return head
+
+        self.reversee(arr,0,n-k-1)
+        self.reversee(arr,n-k,n-1)
+        self.reversee(arr,0,n-1)
+
+        i = 0
+        temp = head
+        for i in range(n):
+            temp.val = arr[i]
+            i += 1
+            temp = temp.next
+        return head
+
+#TC:O(5n)
+#SC:O(n)
+
+#Optimal
+# Definition for singly-linked list.
+# class ListNode:
+#     def __init__(self, val=0, next=None):
+#         self.val = val
+#         self.next = next
+class Solution:
+    def findit(self,temp,k):
+        count = 1
+        while temp != None:
+            if count == k:
+                return temp
+            count += 1
+            temp = temp.next
+        return temp
+
+    def rotateRight(self, head: Optional[ListNode], k: int) -> Optional[ListNode]:
+        temp = head
+        if head is None or head.next is None or k == 0:
+            return head
+        
+        n = 1
+        tail = head
+        while tail.next is not None:
+            tail = tail.next
+            n += 1
+        
+        k = k%n
+        if k == 0:
+            return head
+        
+        tail.next = head
+        lastnode = self.findit(temp,n-k)
+        head = lastnode.next
+        lastnode.next = None
+
+        return head
+#TC:O(n)
+#SC:O(1)
+
+
+
