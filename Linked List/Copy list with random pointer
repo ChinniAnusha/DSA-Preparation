@@ -34,3 +34,54 @@ class Solution:
          return hashmap[head]
 #TC:O(2n)
 #SC:O(n)+O(n)(for storing the copy of the actual nodes)
+
+#Optimal
+"""
+# Definition for a Node.
+class Node:
+    def __init__(self, x: int, next: 'Node' = None, random: 'Node' = None):
+        self.val = int(x)
+        self.next = next
+        self.random = random
+"""
+
+class Solution:
+    def insert(self,head):
+        temp = head
+        while temp:
+            copynode = Node(temp.val)
+            copynode.next = temp.next
+            temp.next = copynode
+
+            temp = temp.next.next
+    
+    def connectr(self,head):
+        temp = head
+        while temp:
+            copynode = temp.next
+            if temp.random is not None:    
+                copynode.random = temp.random.next
+            else:
+                copynode.random = None
+            
+            temp = temp.next.next
+            
+    def getcopylist(self,head):
+        temp = head
+        dummynode = Node(-1)
+        res = dummynode
+        while temp:
+             res.next = temp.next
+             temp.next = temp.next.next
+
+             res = res.next
+             temp = temp.next
+        return dummynode.next
+
+    def copyRandomList(self, head: 'Optional[Node]') -> 'Optional[Node]':
+         self.insert(head)
+         self.connectr(head)
+         return self.getcopylist(head) 
+#TC:O(3n)
+#SC:O(1)
+
