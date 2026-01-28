@@ -1,0 +1,36 @@
+#Brute force
+"""
+# Definition for a Node.
+class Node:
+    def __init__(self, x: int, next: 'Node' = None, random: 'Node' = None):
+        self.val = int(x)
+        self.next = next
+        self.random = random
+"""
+
+class Solution:
+    def copyRandomList(self, head: 'Optional[Node]') -> 'Optional[Node]':
+         hashmap = {}
+         if head is None:
+            return head
+
+         temp = head
+         while temp:
+            newnode = Node(temp.val)
+            hashmap[temp] = newnode
+            temp = temp.next
+         temp = head
+         while temp:
+            copynode = hashmap[temp]
+            if temp.next is not None:
+               copynode.next = hashmap[temp.next]
+            else:
+                copynode.next = None
+            if temp.random is not None:
+                copynode.random = hashmap[temp.random]
+            else:
+                copy.random = None
+            temp = temp.next
+         return hashmap[head]
+#TC:O(2n)
+#SC:O(n)+O(n)(for storing the copy of the actual nodes)
