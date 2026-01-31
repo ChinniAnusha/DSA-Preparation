@@ -1,0 +1,33 @@
+#Optimal approach
+def canweplace(arr,cows,minimumdistance):
+    count = 1
+    n = len(arr)
+    lastcow = arr[0]
+    for i in range(1,n):
+        if arr[i] - lastcow >= minimumdistance:
+            count += 1
+            lastcow = arr[i]
+            if count == cows:
+                return True
+    return False
+
+def aggressiveCows(stalls, k):
+    # Write your code here.
+    stalls.sort()
+    low = 0
+    high = max(stalls)-min(stalls)
+    ans = -1 
+    while low <= high:
+        mid = (low+high) // 2
+        canplace = canweplace(stalls,k,mid)
+
+        if canplace is True:
+            ans = mid
+            low = mid + 1
+        else:
+            high = mid - 1 
+#TC:O(n*log(max(stalls)-min(stalls)))+O(nlogn)
+#SC:O(1)
+
+    
+    return ans
