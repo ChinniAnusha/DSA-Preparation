@@ -1,0 +1,40 @@
+#iterative
+class Solution:
+    def myPow(self, x: float, n: int) -> float:
+         nn = n
+         ans = 1
+         if nn < 0:
+            nn = -1*n
+        
+         while nn:
+            if nn % 2 == 0:
+                x = x*x
+                nn = nn/2
+            else:
+                ans = ans*x
+                nn = nn - 1
+         if n < 0:
+            ans = 1 / ans
+         return ans
+#TC:O(logn)
+#SC:O(1)
+
+#Optimal
+class Solution:
+    def power(self,x,n):
+        if n == 0:
+            return 1
+        if n % 2 == 1:
+            return x * self.power(x,n-1)
+        else:
+            return self.power(x*x,n//2)
+
+
+    def myPow(self, x: float, n: int) -> float:
+         if n < 0:
+            return 1/self.power(x,-n)
+         return self.power(x,n)
+#TC:O(logn)
+#SC:O(1)
+
+
