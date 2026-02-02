@@ -1,0 +1,21 @@
+#Binary exponentiation
+class Solution:
+    def countGoodNumbers(self, n: int) -> int:
+        mod = 10**9 + 7
+    
+        def power(x,n):
+            res = 1
+            while n:
+                if n%2 == 1:
+                    res = (res * x) % mod
+                    n = n-1
+                else:
+                    x = (x*x) % mod
+                    n = n/2
+            return res
+
+        even = ceil(n/2)
+        odd = n//2
+        return (power(5,even) * power(4,odd)) % mod
+#TC:O(logn)
+#SC:O(1)
