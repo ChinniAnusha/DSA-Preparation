@@ -1,0 +1,22 @@
+#Solved using recursion
+from typing import List
+
+def reverseStack(stack: List[int]) -> None:
+    # Write your code here.
+    if not stack:
+        return
+    top = stack.pop()
+    reverseStack(stack)
+    insert(stack,top)
+    return
+
+def insert(stack,element):
+    if not stack:
+      stack.append(element)
+      return
+    top = stack.pop()
+    insert(stack,element)
+    stack.append(top)
+    return
+#TC:O(n^2)
+#SC:O(n)
