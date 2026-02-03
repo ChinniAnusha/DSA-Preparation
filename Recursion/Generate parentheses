@@ -1,0 +1,21 @@
+#Solved using recursion
+class Solution:
+    def solve(self,n,current_string,result,open,close):
+             if len(current_string) == 2*n:
+                result.append(current_string)
+                return
+             
+             if open < n:
+                self.solve(n,current_string+'(',result,open+1,close)
+             if close < open:
+                self.solve(n,current_string+')',result,open,close+1)
+                
+
+    def generateParenthesis(self, n: int) -> List[str]:
+         open = 0
+         close = 0
+         result = []
+         self.solve(n,"",result,open,close)
+         return result
+#TC:O(c(n)*n)
+#SC:O(n)
