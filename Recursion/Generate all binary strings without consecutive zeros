@@ -1,0 +1,16 @@
+#solved using recursion
+class Solution:
+    def solve(self,n,s,result):
+        if n == 0:
+            result.append(s)
+            return
+        if not s or s[-1] != '0':
+          self.solve(n-1,s+'0',result)
+        self.solve(n-1,s+'1',result) 
+
+    def validStrings(self, n: int) -> List[str]:
+        result = []
+        self.solve(n,"",result)
+        return result
+#TC:O(n.2^n)
+#SC:O(n)+O(n.2^n)
