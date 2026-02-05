@@ -1,0 +1,19 @@
+class Solution:
+    def solve(self,index,target,candidates,ans,arr):
+        if index == len(candidates):
+            if target == 0:
+                ans.append(arr[:])
+            return 
+
+        if candidates[index] <= target:
+            arr.append(candidates[index])
+            self.solve(index,target-candidates[index],candidates,ans,arr)
+            arr.pop()
+        self.solve(index+1,target,candidates,ans,arr) 
+
+
+    def combinationSum(self, candidates: List[int], target: int) -> List[List[int]]:
+        ans = []
+        arr = []
+        self.solve(0,target,candidates,ans,arr)
+        return ans
