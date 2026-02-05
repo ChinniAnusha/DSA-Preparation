@@ -1,0 +1,23 @@
+from os import *
+from sys import *
+from collections import *
+from math import *
+def solve(i,summ,k,arr):
+    if i == len(arr):
+        if summ == k:
+            return True
+        return False
+    
+    if solve(i+1,summ+arr[i],k,arr) is True:
+        return True
+    
+    if solve(i+1,summ,k,arr) is True:
+        return True
+    
+    return False
+
+def subsetSumToK(n, k, arr):
+     return solve(0,0,k,arr)
+
+#TC:O(2^n)
+#SC:O(n)
