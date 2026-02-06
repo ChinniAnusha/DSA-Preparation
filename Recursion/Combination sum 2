@@ -1,0 +1,21 @@
+class Solution:
+    def solve(self,index,target,candidates,ans,arr):
+        if target == 0:
+            ans.append(list(arr))
+            return 
+
+        for i in range(index,len(candidates)):
+             if i > index and candidates[i] == candidates[i-1]:
+                continue
+             if candidates[i] > target:
+                 break
+             arr.append(candidates[i])
+             self.solve(i+1,target-candidates[i],candidates,ans,arr)
+             arr.pop()
+
+
+    def combinationSum2(self, candidates: List[int], target: int) -> List[List[int]]:
+        ans = []
+        candidates.sort() 
+        self.solve(0,target,candidates,ans,[])
+        return ans
