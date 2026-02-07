@@ -1,0 +1,37 @@
+from os import *
+from sys import *
+from collections import *
+from math import *
+def solve(i,j,arr,n,vis,string,ans):
+    if i == n-1 and j == n-1: #base case
+        ans.append(string)
+        return
+    #Downward
+    if i+1 < n and not vis[i+1][j] and arr[i+1][j] == 1:
+        vis[i][j] = 1
+        solve(i+1,j,arr,n,vis,string+"D",ans)
+        vis[i][j] = 0
+    #left
+    if j - 1 >= 0 and not vis[i][j-1] and arr[i][j-1] == 1:
+        vis[i][j] = 1
+        solve(i,j-1,arr,n,vis,string+"L",ans)
+        vis[i][j] = 0
+    #right
+    if j+1 < n and not vis[i][j+1] and arr[i][j+1] == 1:
+        vis[i][j] = 1
+        solve(i,j+1,arr,n,vis,string+"R",ans)
+        vis[i][j] = 0
+    #upward
+    if i-1 >= 0 and not vis[i-1][j] and arr[i-1][j] == 1:
+        vis[i][j] = 1
+        solve(i-1,j,arr,n,vis,string+"U",ans)
+        vis[i][j] = 0
+        
+
+def searchMaze(arr, n):
+    ans = []
+    vis = [[0]*n for _ in range(n)]
+    if arr[0][0] == 0:
+        return ans
+    solve(0,0,arr,n,vis,"",ans)
+    return ans
