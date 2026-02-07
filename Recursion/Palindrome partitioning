@@ -1,0 +1,25 @@
+class Solution:
+    def ispalindrome(self,s,left,right):
+        while left <= right:
+            if s[left] != s[right]:
+                return False
+            left += 1
+            right -= 1
+        return True
+
+    def solve(self,ind,s,ans,res):
+        if ind == len(s):
+            ans.append(list(res))
+            return
+        for i in range(ind,len(s)):
+            if self.ispalindrome(s,ind,i) is True:
+                res.append(s[ind:i+1])
+                self.solve(i+1,s,ans,res)
+                res.pop()
+
+
+    def partition(self, s: str) -> List[List[str]]:
+        ans = []
+        res = [] 
+        self.solve(0,s,ans,res)
+        return ans
