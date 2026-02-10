@@ -1,0 +1,25 @@
+class Solution:
+    def divide(self, dividend: int, divisor: int) -> int:
+        sign = True
+        if dividend >= 0 and divisor < 0:
+            sign = False
+        if dividend < 0 and divisor >= 0:
+            sign = False
+        n = abs(dividend)
+        d = abs(divisor)
+        quotient = 0
+        while n >= d:
+            count = 0
+            while n >= (d<<(count+1)):
+                count += 1
+            quotient += (1 << count)
+            n -= d * 2** count #d << count 
+        if quotient >= 2 ** 31 and sign == True:
+            return 2 ** 31 - 1
+        if quotient >= 2 ** 31 and sign == False:
+            return -2 ** 31
+        if sign == False:
+            return (-1)*quotient
+        return quotient
+#TC:O(log n)^ 2
+#SC:O(1)
