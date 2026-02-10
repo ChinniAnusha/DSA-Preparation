@@ -1,0 +1,10 @@
+class Solution:
+    def minBitFlips(self, start: int, goal: int) -> int:
+         ans = start ^ goal
+         count = 0
+         for i in range(32): #we took 32 cause the interger is 32 bit signed integer
+             count += (ans&1)
+             ans = ans >> 1
+         return count
+#TC:O(32)
+#SC:O(1)
