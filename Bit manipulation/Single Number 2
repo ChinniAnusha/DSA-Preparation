@@ -1,0 +1,17 @@
+#solved using hashing
+class Solution:
+    def singleNumber(self, nums: List[int]) -> int:
+        n = len(nums)
+        hashmap = {}
+        for i in range(n):
+            if nums[i] in hashmap:
+                 hashmap[nums[i]] += 1
+            else:
+                 hashmap[nums[i]] = 1
+        for i in range(n):
+            if hashmap[nums[i]] == 1:
+                return nums[i]
+
+  #TC:O(n)
+  #SC:O(n)
+  
