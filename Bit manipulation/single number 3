@@ -1,0 +1,19 @@
+#Optimal approach
+class Solution:
+    def singleNumber(self, nums: List[int]) -> List[int]:
+         n = len(nums)
+         xor = 0
+         for i in range(n):
+            xor ^= nums[i]
+         right_most_set_bit = (xor & (xor-1)) ^ xor
+         bucket1,bucket2 = 0,0 
+         for i in range(n):
+            if nums[i] & right_most_set_bit:
+                bucket1 ^= nums[i]
+            else:
+                bucket2 ^= nums[i]
+
+         return [bucket1,bucket2]
+
+  #TC:O(2n)
+  #SC:O(1)
