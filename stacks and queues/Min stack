@@ -31,3 +31,47 @@ class MinStack:
 #TC:O(1)
 #SC:O(2n)
 
+#implementation using one stack
+class MinStack:
+
+    def __init__(self):
+       self.s1 = []
+       self.mini = None
+
+    def push(self, val: int) -> None:
+       if not self.s1:
+           self.mini = val
+           self.s1.append(val)
+       else:
+           if val > self.mini:
+              self.s1.append(val)
+           else:
+              x = (2*val-self.mini)
+              self.mini = val
+              self.s1.append(x)
+
+
+    def pop(self) -> None:
+       if not self.s1:
+          return
+       x = self.s1[-1]
+       self.s1.pop()
+       if x < self.mini:
+         self.mini = 2*self.mini - x
+
+
+    def top(self) -> int:
+        if not self.s1:
+          return
+        x = self.s1[-1]
+        if self.mini > x:
+            return self.mini
+        return x
+         
+
+    def getMin(self) -> int:
+       return self.mini
+#TC:O(1)
+#SC:O(n)
+
+
