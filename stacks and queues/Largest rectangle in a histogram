@@ -40,3 +40,34 @@ class Solution:
 
 #TC:O(5n)
 #SC:O(4n)
+
+#solved in single pass
+class Solution:
+    def largestRectangleArea(self, heights: List[int]) -> int:
+        n = len(heights)
+        stack = []
+        maxarea = 0
+        for i in range(n):
+            while stack and heights[stack[-1]] > heights[i]:
+                 index = stack.pop()
+                 element = heights[index]
+                 nse = i 
+                 if stack:
+                    pse = stack[-1]
+                 else:
+                    pse = -1
+                 maxarea = max(maxarea,(nse-pse-1)*element)
+            stack.append(i)
+        while stack:
+            nse = n
+            index = stack.pop()
+            element = heights[index]
+            if stack:
+                pse = stack[-1]
+            else:
+                pse = -1
+            maxarea = max(maxarea,(nse-pse-1)*element)
+        return maxarea
+#TC:O(n)+O(n)
+#SC:O(n)
+
