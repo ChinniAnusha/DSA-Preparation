@@ -1,0 +1,42 @@
+class Solution:
+    def nnse(self,heights):
+        stack = []
+        n = len(heights)
+        result = [0]*n
+        for i in range(n-1,-1,-1):
+            while stack and heights[stack[-1]] >= heights[i]:
+                stack.pop()
+            if stack:
+                result[i] = stack[-1]
+            else:
+                result[i] = n
+            
+            stack.append(i)  
+        
+        return result
+
+    def ppse(self,heights):
+        stack = []
+        n = len(heights)
+        ans = [0]*n
+        for i in range(n):
+            while stack and heights[stack[-1]] > heights[i]:
+                stack.pop()
+            if stack:
+                ans[i] = stack[-1]
+            else:
+                ans[i] = -1
+            stack.append(i)
+        return ans 
+
+    def largestRectangleArea(self, heights: List[int]) -> int:
+        nse = self.nnse(heights)
+        pse = self.ppse(heights)
+        maxi = 0
+        n =len(heights)
+        for i in range(n):
+            maxi = max(maxi,heights[i]*(nse[i]-pse[i]-1))
+        return maxi
+
+#TC:O(5n)
+#SC:O(4n)
