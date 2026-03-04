@@ -1,0 +1,67 @@
+class MinHeap:
+    def __init__(self,capacity=0):
+        self.heap = []
+        self.capacity = capacity
+
+
+    def parent(self,i):
+        return (i-1)//2
+    
+    def left(self,i):
+        return 2*i+1
+    
+    def right(self,i):
+        return 2*i+2
+
+    def swap(self,i,j):
+        self.heap[i],self.heap[j] = self.heap[j],self.heap[i]
+    
+
+    def extractMinElement(self): 
+        if not self.heap:
+            return -1
+        if len(self.heap) == 1:
+            return self.heap.pop()
+
+        root = self.heap[0]
+        self.heap[0] = self.heap.pop()
+        self.heapify_down(0)
+        
+        return root
+
+    def heapify_up(self,i):
+        while i > 0 and self.heap[self.parent(i)] > self.heap[i]:
+            self.swap(i,self.parent(i)) 
+            i = self.parent(i)
+
+    def heapify_down(self,i):
+        smallest = i
+        left = self.left(i)
+        right = self.right(i)
+
+        if left < len(self.heap) and self.heap[left] < self.heap[smallest]:
+            smallest = left
+        if right < len(self.heap) and self.heap[right] < self.heap[smallest]:
+            smallest = right
+        
+        if smallest != i:
+            self.swap(i, smallest)
+            self.heapify_down(smallest)
+
+
+    def deleteElement(self, ind):
+        if ind >= len(self.heap):
+            return
+        self.heap[ind] = self.heap[-1]
+        self.heap.pop()
+
+        if ind > 0 and self.heap[ind] < self.heap[self.parent(ind)]:
+             self.heapify_up(ind)
+        else:
+            self.heapify_down(ind)
+
+    def insert(self, val):
+        if len(self.heap) >= self.capacity:
+            return None
+        self.heap.append(val)
+        self.heapify_up(len(self.heap)-1)
