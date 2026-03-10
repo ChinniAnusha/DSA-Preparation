@@ -1,0 +1,32 @@
+import heapq
+class Solution:
+    def isNStraightHand(self, hand: List[int], groupSize: int) -> bool:
+        n = len(hand)
+        freq = {}
+        if n % groupSize != 0:
+            return False
+        
+        for i in range(n):
+            if hand[i] in freq:
+                freq[hand[i]] += 1
+            else:
+                freq[hand[i]] = 1 
+        
+        min_heap = []
+        for num in freq:
+            heapq.heappush(min_heap,num)
+        
+        while min_heap:
+            first = min_heap[0]
+            for i in range(first,first+groupSize):
+                if i not in freq:
+                    return False
+                freq[i] -= 1
+
+                if freq[i] == 0:
+                    if i != min_heap[0]:
+                        return False
+                    heapq.heappop(min_heap)
+        return True
+#TC:O(nlogn)
+#SC:O(n)
