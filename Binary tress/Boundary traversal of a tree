@@ -1,0 +1,49 @@
+def leftt(root,res):
+  curr = root.left
+  while curr:
+      if not (curr.left is None and curr.right is None):
+         res.append(curr.data)
+      if curr.left:
+         curr = curr.left
+      else:
+         curr = curr.right
+
+def rightt(root,res):
+     curr = root.right
+     temp = []
+     while curr:
+         if not(curr.left is None and curr.right is None):
+            temp.append(curr.data)
+         if curr.right:
+             curr = curr.right
+         else:
+             curr = curr.left
+     n = len(temp)
+     for i in range(n-1,-1,-1):
+         res.append(temp[i])
+
+def leaves(root,res):
+    if root is None:
+        return 
+    if root.left is None and root.right is None:
+        res.append(root.data)
+    
+    leaves(root.left,res)
+    leaves(root.right,res)
+
+def traverseBoundary(root):
+    # Write your code here.
+    res = []
+    if not root:
+        return res
+    else:
+        res.append(root.data)
+    leftt(root,res)
+    leaves(root.left,res)
+    leaves(root.right,res)
+    rightt(root,res)
+
+    return res
+
+#TC:O(n)
+#SC:O(h)
