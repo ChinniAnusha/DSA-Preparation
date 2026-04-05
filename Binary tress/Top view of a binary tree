@@ -29,5 +29,5 @@ def getTopView(root):
     
     return ans
 
-#TC:O(n)
+#TC:O(nlogn)
 #SC:O(n)
