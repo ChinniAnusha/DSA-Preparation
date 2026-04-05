@@ -1,0 +1,33 @@
+class BinaryTreeNode:
+    def __init__(self, data):
+        self.val = data
+        self.left = None
+        self.right = None
+
+def getTopView(root):
+    # Write your code here.
+    ans = []
+    if root is None:
+        return ans
+
+    topview = deque()
+    topview.append((root,0))
+
+    nodes = {}
+
+    while topview:
+        temp,vertical = topview.popleft()
+        if vertical not in nodes:
+            nodes[vertical] = temp.val
+        if temp.left:
+            topview.append((temp.left,vertical-1))
+        if temp.right:
+            topview.append((temp.right,vertical-1))
+    
+    for key in sorted(nodes.keys()):
+        ans.append(nodes[key])
+    
+    return ans
+
+#TC:O(n)
+#SC:O(n)
