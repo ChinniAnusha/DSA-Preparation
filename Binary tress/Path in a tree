@@ -1,0 +1,31 @@
+class TreeNode:   
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+def getpath(root,arr,x):
+    if root is None:
+        return False
+   
+    arr.append(root.data)
+    
+    if root.data == x:
+        return True
+    
+    if getpath(root.left,arr,x) or getpath(root.right,arr,x):
+        return True
+    
+    arr.pop()
+    return False
+
+def pathInATree(root: TreeNode, x: int) -> List[int]:
+    # Write your code here.
+    arr = []
+    if root is None:
+        return arr
+    getpath(root,arr,x)
+    return arr
+
+#TC:O(n)
+#SC:O(h)
