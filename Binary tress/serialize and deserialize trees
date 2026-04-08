@@ -1,0 +1,59 @@
+from collections import deque
+# Definition for a binary tree node.
+# class TreeNode(object):
+#     def __init__(self, x):
+#         self.val = x
+#         self.left = None
+#         self.right = None
+
+class Codec:
+
+    def serialize(self, root):
+        if root is None:
+            return ""
+        string = ""
+        q = deque()
+        q.append(root)
+        while q:
+            current = q.popleft()
+            if current != None:
+                string += str(current.val) + ","
+            else:
+                string += "#," 
+
+            if current != None:
+                q.append(current.left)
+                q.append(current.right)
+
+        return string       
+
+    def deserialize(self, data):
+        if not data:
+            return None
+        nodes = data.split(',')
+
+        root = TreeNode(int(nodes[0]))
+
+        q = deque()
+        q.append(root)
+
+        i = 1
+        while q and i < len(nodes) - 1:
+            current = q.popleft()
+
+            if nodes[i] != "#":
+                left = TreeNode(int(nodes[i]))
+                current.left = left
+                q.append(left)
+            i += 1
+
+            if  nodes[i] != "#":
+                right = TreeNode(int(nodes[i]))
+                current.right = right
+                q.append(right)
+            i += 1
+
+        return root
+
+#TC:O(n),O(n)
+#SC:O(n),O(n)
