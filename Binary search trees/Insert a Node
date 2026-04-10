@@ -1,0 +1,17 @@
+class Solution:
+    def insertIntoBST(self, root: Optional[TreeNode], val: int) -> Optional[TreeNode]:
+        if root is None:
+            return TreeNode(val)
+        
+        if val > root.val:
+           a = self.insertIntoBST(root.right,val)
+        
+           root.right = a
+           return root
+
+        if val < root.val:
+           b = self.insertIntoBST(root.left,val)
+           root.left = b
+           return root
+#TC:O(logn)
+#SC:O(1)
