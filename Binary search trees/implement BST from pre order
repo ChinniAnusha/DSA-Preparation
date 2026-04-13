@@ -1,0 +1,17 @@
+class Solution:
+    def build(self,i,preorder,bound):
+        if self.i == len(preorder) or preorder[self.i] > bound:
+            return None
+        root = TreeNode(preorder[i])
+        self.i += 1
+        root.left = self.build(self.i,preorder,root.val)
+        root.right = self.build(self.i,preorder,bound)
+
+        return root
+
+    def bstFromPreorder(self, preorder: List[int]) -> Optional[TreeNode]:
+        self.i =  0
+        maxi = float('inf')
+        return self.build(self.i,preorder,maxi)
+#TC:O(3n)
+#SC:O(1)
