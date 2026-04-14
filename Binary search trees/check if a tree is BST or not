@@ -1,0 +1,20 @@
+class Solution:
+    def check(self,node,mini,maxi):
+        if node is None:
+            return True
+        if node.val <= mini or node.val >= maxi:
+            return False
+        left = self.check(node.left,mini,node.val) 
+        if not left:
+            return False
+
+        right = self.check(node.right,node.val,maxi)
+        if not right:
+            return False
+        return True
+    def isValidBST(self, root: Optional[TreeNode]) -> bool:
+        maxi = float('inf')
+        mini = float('-inf')
+        return self.check(root,mini,maxi)
+#TC:O(n)
+#SC:O(1)
