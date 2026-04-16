@@ -1,0 +1,27 @@
+class Solution:
+    def inorder(self,Node):
+        if Node is None:
+            return None
+        self.inorder(Node.left)
+        if self.prev is not None and Node.val < self.prev.val:
+            if self.first is None:
+                self.first = self.prev
+                self.middle = Node
+            else:
+                self.last = Node
+        self.prev = Node
+        self.inorder(Node.right)
+    def recoverTree(self, root: Optional[TreeNode]) -> None:
+        if root is None:
+            return None
+        self.first = None
+        self.middle = None
+        self.last = None
+        self.prev = TreeNode(float('-inf'))
+        self.inorder(root)
+        if self.first and self.last:
+            self.first.val,self.last.val = self.last.val,self.first.val
+        elif self.first and self.middle:
+            self.first.val,self.middle.val = self.middle.val,self.first.val
+#TC:O(n)
+#SC:O(1)
