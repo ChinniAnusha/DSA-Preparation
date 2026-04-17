@@ -1,0 +1,46 @@
+class BSTiterator:
+    def __init__(self,root,isreverse):
+        self.stack = []
+        self.reverse = isreverse
+        self.pushall(root)
+
+    def hasnext(self):
+        return len(self.stack) > 0
+    
+    def next(self):
+        node = self.stack.pop()
+        if not self.reverse: #reverse is false we go right
+            self.pushall(node.right)
+        else:
+            self.pushall(node.left)
+        return node.val
+    def pushall(self,node):
+        while node:
+            self.stack.append(node)
+            if self.reverse:
+                node = node.right
+            else:
+                node = node.left
+
+class Solution:
+    def findTarget(self, root: Optional[TreeNode], k: int) -> bool:
+        if not root:
+            return False
+        l = BSTiterator(root,False)
+        r = BSTiterator(root,True)
+
+        i = l.next()
+        j = r.next()
+
+        while i < j:
+            if i + j > k:
+               j = r.next()
+            elif i + j < k:
+               i = l.next()
+            else:
+                return True
+
+        return False
+
+#TC:O(n)
+#SC:O(h)
