@@ -1,0 +1,21 @@
+class Solution:
+    def helper(self,root):
+        if root is None:
+            return (float('inf'),float('-inf'),0,0)
+        left_min,left_max,left_size,left_sum = self.helper(root.left)
+        right_min,right_max,right_size,right_sum = self.helper(root.right)
+
+        if left_max < root.val < right_min:
+            curr_sum  = left_sum + right_sum + root.val
+            size = 1+right_size+left_size
+            self.summ = max(self.summ,curr_sum)
+            return (min(root.val,left_min),max(root.val,right_max),size,curr_sum)
+        else:
+            return (float('-inf'),float('inf'),max(left_size,right_size),0)
+
+    def maxSumBST(self, root: Optional[TreeNode]) -> int:
+        self.summ = 0
+        self.helper(root)
+        return self.summ
+#TC:O(n)
+#SC:O(h)
