@@ -1,0 +1,29 @@
+class Solution:
+    def dfs(self,node,listt,visited):
+        visited[node] = 1
+        for num in listt[node]:
+            if visited[num] == 0:
+                self.dfs(num,listt,visited)
+
+
+    def findCircleNum(self, isConnected: List[List[int]]) -> int:
+        m = len(isConnected)
+        n = len(isConnected[0])
+        listt = [[] for _ in range(m)]
+        for i in range(m):
+            for j in range(n):
+                if isConnected[i][j] == 1 and i != j:
+                    listt[i].append(j)
+                    listt[j].append(i) 
+    
+        visited = [0]*m
+        count = 0
+        for i in range(m):
+            if visited[i] == 0:
+                count += 1
+                self.dfs(i,listt,visited)
+        
+        return count
+
+#TC:O(n)+O(V+E)
+#SC:O(n)+O(n)
