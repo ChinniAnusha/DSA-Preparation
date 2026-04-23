@@ -1,0 +1,33 @@
+from collections import deque
+def bfs(source_node,adj_listt,visited,q):
+    q.append((source_node,-1))
+    visited[source_node] = 1
+
+    while q:
+       node,parent = q.popleft()
+       for neigh in adj_listt[node]:
+           if visited[neigh] == 0:
+               q.append((neigh,node))
+               visited[neigh] = 1
+           elif parent != neigh:
+               return True  
+    return False
+
+def cycleDetection(edges, n, m):
+
+    # Write your code here.
+    # Return "Yes" if cycle id present in the graph else return "No".
+    adj_listt = [[] for _ in range (n+1)]
+    for u,v in edges:
+        adj_listt[u].append(v)
+        adj_listt[v].append(u)
+    visited = [0]*(n+1)
+    q = deque()
+    for i in range(1,n+1):
+        if visited[i] == 0:
+            if bfs(i,adj_listt,visited,q):
+                return "Yes"
+    return "No"
+
+#TC:O(n+2e)+O(n)
+#SC:O(n)+O(n)
