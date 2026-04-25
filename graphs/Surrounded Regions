@@ -1,0 +1,37 @@
+class Solution:
+    def dfs(self,r,c,visited,m,n,delrow,delcol,board):
+        visited[r][c] = 1
+        for i in range(4):
+            nrow = r + delrow[i]
+            ncol = c + delcol[i]
+            if nrow >= 0 and nrow < m and ncol >= 0 and ncol < n and visited[nrow][ncol] != 1 and board[nrow][ncol] == "O":
+                self.dfs(nrow,ncol,visited,m,n,delrow,delcol,board)
+
+    def solve(self, board: List[List[str]]) -> None:
+        m = len(board)
+        n = len(board[0])
+        visited = [[0]*n for _ in range(m)]
+        delrow = [-1,0,+1,0]
+        delcol = [0,1,0,-1]
+        for i in range(n):
+            
+            if board[0][i] == "O" and visited[0][i] != 1: 
+                self.dfs(0,i,visited,m,n,delrow,delcol,board)
+            
+            if board[m-1][i] == "O" and visited[m-1][i] != 1:
+                self.dfs(m-1,i,visited,m,n,delrow,delcol,board)
+                
+        for j in range(m):
+           
+            if board[j][0] == "O" and visited[j][0] != 1:
+                self.dfs(j,0,visited,m,n,delrow,delcol,board)
+            
+            if board[j][n-1] == "O" and visited[j][n-1] != 1:
+                self.dfs(j,n-1,visited,m,n,delrow,delcol,board)
+        
+        for i in range(m):
+            for j  in range(n):
+                if board[i][j] == "O" and visited[i][j] != 1:
+                    board[i][j] = "X"
+#TC:O(M*N)
+#SC:O(M*N)
