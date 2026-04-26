@@ -1,0 +1,27 @@
+from collections import deque
+class Solution:
+    def check(self,start,end,color,graph):
+        q = deque()
+        q.append(start)
+        color[start] = 0
+        while q:
+            node = q.popleft()
+            for i in graph[node]:
+                if color[i] == -1:
+                    color[i] = not color[node]
+                    q.append(i)
+                elif color[i] == color[node]:
+                    return False
+        return True
+
+
+    def isBipartite(self, graph: List[List[int]]) -> bool:
+        n = len(graph)
+        color = [-1]*n
+        for i in range(n):
+            if color[i] == -1:
+                if self.check(i,n,color,graph) == False:
+                    return False
+        return True
+#TC:O(V+2E)
+#SC:O(n)
