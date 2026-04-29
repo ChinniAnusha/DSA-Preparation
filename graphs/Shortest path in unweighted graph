@@ -1,0 +1,37 @@
+from collections import deque
+def shortestPath(edges, n, m, s, t):
+    adj = [[] for _ in range(n+1)]
+    for u,v in edges:
+        adj[u].append(v)
+        adj[v].append(u)
+    
+
+    visited = [0]*(n+1)
+    parent = [-1]*(n+1)
+    
+    q = deque()
+    q.append(s)
+    visited[s] = 1
+
+    while q:
+        node = q.popleft()
+        if node == t:
+             break
+        for neigh in adj[node]:
+            if visited[neigh] == 0:
+                visited[neigh] = 1
+                parent[neigh] = node
+                q.append(neigh)
+            
+    
+    path = []
+    cur = t
+    while cur != -1:
+        path.append(cur)
+        cur = parent[cur]
+
+    path.reverse()
+    return path
+
+#TC:O(n+m)
+#SC:O(n)+O(n)+O(n) +O(n+m) ~ O(n+m)
