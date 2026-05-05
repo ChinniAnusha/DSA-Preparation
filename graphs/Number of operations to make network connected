@@ -1,0 +1,40 @@
+class DSU:
+    def __init__(self,n):
+        self.parent = list(range(n))
+        self.rank = [0]*n
+    
+    def find(self,x):
+        if self.parent[x] != x:
+            self.parent[x] = self.find(self.parent[x])
+        return self.parent[x]
+    def union(self,u,v):
+        ulp_u = self.find(u)
+        ulp_v = self.find(v)
+        if ulp_u == ulp_v:
+            return
+        if self.rank[ulp_u] < self.rank[ulp_v]:
+            self.parent[ulp_u] = ulp_v
+        if self.rank[ulp_v] < self.rank[ulp_u]:
+            self.parent[upl_v] = ulp_u
+        
+        else:
+            self.parent[ulp_u] = ulp_v
+            self.rank[ulp_u] += 1
+        
+class Solution:
+    def makeConnected(self, n: int, connections: List[List[int]]) -> int:
+        if (n - 1) > len(connections):
+            return -1
+       
+        dsu = DSU(n)
+        for u,v in connections:
+            dsu.union(u,v)
+        
+        components = set()
+        for i in range(n):
+            components.add(dsu.find(i))
+
+        return len(components)-1
+
+#TC:O(n+m*alpha(n))
+#SC:O(n)
