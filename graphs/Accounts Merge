@@ -24,7 +24,9 @@ class DSU:
 class Solution:
     def accountsMerge(self, accounts: List[List[str]]) -> List[List[str]]:
         n = len(accounts)
-        dsu = DSU(n)
+        dsu = DSU(n) 
+
+
         
         #union accounts having common emails
         mapMailnode = {}
